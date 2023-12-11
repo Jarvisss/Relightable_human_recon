@@ -1,0 +1,82 @@
+fdim=128
+GPU=1
+CUDA_VISIBLE_DEVICES=${GPU} python pretrain.py\
+    --id "pretrain_thuman2"\
+    --dataset 'Thuman2'\
+    --use_perspective\
+    --use_feature_confidence\
+    --use_align_loss\
+    --use_linear_z\
+    --normalize_z\
+    --use_augmentation\
+    --use_gt_intensity\
+    --intensity 10.0\
+    --angle_step 90\
+    --random_scale\
+    --random_trans\
+    --offline_sample\
+    --align_corner\
+    --gpu ${GPU}\
+    --seed 1995\
+    --size 512\
+    --near 0.1\
+    --far 4.0\
+    --fov 68.4\
+    --batch_size 1\
+    --epochs 100\
+    --epochs_warm_up 20\
+    --path_to_dataset '/mnt/data1/lujiawei/thuman2_rescaled_prt_512_multi_light_w_flash_no_env_persp_fov_68.40_unit_sphere_d2_near_0.10_far_4.00_dist_1.78_intensity_1.000'\
+    --path_to_obj '/home/lujiawei/workspace/dataset/thuman2_rescaled_unit_sphere'\
+    --path_to_sample_pts '/mnt/data1/lujiawei/SAMPLE_PT_SCALE_UNIT_SPHERE'\
+    --z_size 2000\
+    --sigma 0.1\
+    --field_type 'sdf'\
+    --filter_type 'UNet_s_deeper_128'\
+    --num_sample_surface 5000\
+    --num_sample_inout 5000\
+    --num_sample_color 5000\
+    --num_views 4\
+    --num_workers 4\
+    --lambda_g1 1\
+    --lambda_g2 1\
+    --lambda_g1_end 15.0\
+    --lambda_reg 0.1\
+    --lambda_align 0.01\
+    --lambda_sign 0.2\
+    --lambda_albedo 1\
+    --norm 'group'\
+    --mlp_activation_type 'silu'\
+    --mlp_activation_type_albedo 'silu'\
+    --mlp_activation_type_light 'silu'\
+    --mlp_norm_type 'none'\
+    --mlp_norm_type_albedo 'none'\
+    --mlp_norm_type_light 'none'\
+    --mlp_dim ${fdim} 1024 512 256 128 1\
+    --mlp_dim_albedo ${fdim} 1024 512 256 128 3\
+    --mlp_dim_roughness ${fdim} 1024 512 256 128 1\
+    --mlp_dim_spec_albedo ${fdim} 1024 512 256 128 3\
+    --mlp_dim_light 256 256 128 64 32 28\
+    --mlp_res_layers_albedo 1 2 3\
+    --mlp_mean_layer_albedo 3\
+    --mlp_res_layers 1 2 3\
+    --mlp_mean_layer 3\
+    --use_transformer\
+    --transformer_geo_d_model ${fdim}\
+    --transformer_geo_d_inner 128\
+    --transformer_tex_d_model ${fdim}\
+    --transformer_tex_d_inner 128\
+    --lr_G 0.0001\
+    --gamma 0.9\
+    --k_type 'exp'\
+    --init_k 2\
+    --init_intensity 1\
+    --model_save_freq 2000\
+    --gen_mesh_freq 1000\
+    --save_sample_points_freq 1000\
+    --vis_sdf_normal_freq 0\
+    --gen_vis_hull_freq 0\
+    --visibility_save_freq 0\
+    --image_proj_save_freq 0\
+    --test_freq 1\
+    --no_num_eval\
+    --resolution 200

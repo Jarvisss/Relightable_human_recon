@@ -1,0 +1,9 @@
+visualize_result/
+test_result/
+logs/
+*.pyc
+*.ply
+*.png
+__pycache__/
+.vscode/
+debug/
