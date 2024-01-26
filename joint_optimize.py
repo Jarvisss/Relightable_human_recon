@@ -346,19 +346,6 @@ def render_imgs(backbone, renderer: DiffRenderer_unified, data_input, data_targe
                 front_back_dist_init=front_back_intersections_slice, ray_mask_init=mask_intersect_slice, cal_diff_normal=cal_diff_normal, no_grad=True,intensity=intensity, jittor_std=opt.eik_std,use_poe=opt.use_positional_encoding,
                 use_TSDF=use_TSDF, TSDF_thres=TSDF_thres, epoch=epoch, save_intermediate=True
             )
-            # sdf_func, albedo_func, gradient_func, spec_func, rough_func = renderer.get_sdf_albedo_gradient_funcs(im_feat_pred, imgs_input, calibs_input, masks_input, z_center, feed_extrin, opt.cal_diff_normal,use_poe=opt.use_positional_encoding, joints_3d=joints_3d)
-
-            # alpha = 200
-            # loss, loss_dict, loss_str = renderer.cal_loss(output, sdf_func, gradient_func,albedo_func,spec_func, rough_func, \
-            #     ray_weights=None,
-            #     ray_in_original_img=None, 
-            #     epoch=epoch,
-            #     include_smooth_loss=False,
-            #     precomputed_indirect=opt.precomputed_indirect, 
-            #     alpha=alpha,
-            #     lambda_reg=opt.lambda_reg, 
-            #     lambda_mask=opt.lambda_mask, 
-            #     lambda_align=opt.lambda_align, writer=writer)
 
             TSDF_thres = old_thres
             renderer.ray_tracer.sphere_tracing_iters = old_iters
@@ -922,7 +909,7 @@ def fine_tuning(opt, path_to_ckpt, path_to_vis, pretrained_ckpt_path=None, logge
     ray_os = cam_locs.unsqueeze(1).expand(-1,N_rays,-1)
     light_dirs = light_dirs.expand(-1,N_rays,-1)
 
-    print(view_ids)
+    print('view ids:',view_ids)
     print('view_weights:', target_view_weight)
     # target_view_weight[1] = 0.0
     # target_view_weight[8] = 0.1
@@ -1326,7 +1313,7 @@ def fine_tuning(opt, path_to_ckpt, path_to_vis, pretrained_ckpt_path=None, logge
 
         ## update the calibs by quat
         
-        save_intermediate = True
+        save_intermediate = False
         output = dr.forward(data_input=data_input, src_img_feats=im_feat_pred, 
             tgt_views=target_view, ray_os=ray_os_sampled, ray_ds=ray_ds_sampled, ray_cs=ray_cs_sampled, ray_ms=ray_ms_sampled, light_dirs=light_dirs_sampled,
             front_back_dist_init=front_back_dist_init_sampled, ray_mask_init=ray_mask_init_sampled, cal_diff_normal=opt.cal_diff_normal,no_grad=opt.no_grad, intensity=intensity,

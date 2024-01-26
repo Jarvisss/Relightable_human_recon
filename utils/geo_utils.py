@@ -892,7 +892,7 @@ save_ply=False, has_gt_albedo=True, vis_error=False, export_uv=False, output_spe
         # save_mesh_ply(save_albedo_path, verts, faces, albedo)
         mesh_low_res = Trimesh(verts, faces, normals)
         components = mesh_low_res.split(only_watertight=False)
-        areas = np.array([c.area for c in components], dtype=np.float)
+        areas = np.array([c.area for c in components], dtype=np.float32)
         mesh_low_res = components[areas.argmax()]
         b_min = mesh_low_res.vertices.min(axis=0) - margin
         b_max = mesh_low_res.vertices.max(axis=0) + margin
@@ -918,7 +918,7 @@ save_ply=False, has_gt_albedo=True, vis_error=False, export_uv=False, output_spe
             return
         mesh_high_res = Trimesh(verts, faces, vertex_normals=normals)
         # components = mesh_high_res.split(only_watertight=False)
-        # areas = np.array([c.area for c in components], dtype=np.float)
+        # areas = np.array([c.area for c in components], dtype=np.float32)
         # mesh_high_res = components[areas.argmax()]
         verts, faces, normals = mesh_high_res.vertices, mesh_high_res.faces, mesh_high_res.vertex_normals
 

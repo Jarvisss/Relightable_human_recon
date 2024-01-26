@@ -75,8 +75,8 @@ def make_training_dirs(opt, exp_name, date):
     """
     # path_to_ckpt_dir = opt.root_dir+ '/checkpoints/{0}/{1}/'.format(date, exp_name)
     # path_to_visualize_dir = opt.root_dir+ '/visualize_result/{0}/{1}/'.format(date, exp_name)
-    path_to_ckpt_dir = '/mnt/data2/lujiawei/tex2cloth_bak/checkpoints/{0}/{1}/'.format(date, exp_name)
-    path_to_visualize_dir = '/mnt/data2/lujiawei/tex2cloth_bak/visualize_result/{0}/{1}/'.format(date, exp_name)
+    path_to_ckpt_dir = './checkpoints/{0}/{1}/'.format(date, exp_name)
+    path_to_visualize_dir = './visualize_result/{0}/{1}/'.format(date, exp_name)
     
 
     if not os.path.isdir(path_to_ckpt_dir):

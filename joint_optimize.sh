@@ -5,13 +5,10 @@ CUDA_VISIBLE_DEVICES=${GPU} python joint_optimize.py\
     --finetune_real_data_train_dir './data/0004_24views'\
     --tune_datatype 'real'\
     --dataset 'Thuman2'\
-    --num_views 12\
+    --num_views 4\
     --epochs 5000\
     --use_perspective\
     --cal_vhull_intersection_online\
-    --use_ggx\
-    --use_alb_sparse_loss\
-    --use_alb_smooth_loss\
     --load_size 512 512\
     --gen_init_mesh\
     --render_init_imgs\
@@ -42,8 +39,6 @@ CUDA_VISIBLE_DEVICES=${GPU} python joint_optimize.py\
     --align_corner\
     --seed 19951023\
     --size 512\
-    --oriH 666\
-    --oriW 375\
     --batch_size 1\
     --epochs_warm_up 0\
     --z_size 2000\

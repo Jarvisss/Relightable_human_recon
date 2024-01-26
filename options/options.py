@@ -263,11 +263,8 @@ def get_options():
     parser.add_argument('--test_subject', type=int, default=0, help='test how many samples, -1 means all')
     parser.add_argument('--test_all_objects', action='store_true', help='use octree to speed up marching cube')
     parser.add_argument('--vis_level_set', action='store_true', help='use octree to speed up marching cube')
-    parser.add_argument('--oriH', type=int)
-    parser.add_argument('--oriW', type=int)
 
     '''Loss options'''
-    
     parser.add_argument('--use_geo_normal_loss', action='store_true', help='use normal loss for occupancy network')
     parser.add_argument('--use_align_loss', action='store_true', help='use align loss for regular sdf')
     parser.add_argument('--use_depth_smooth_loss', action='store_true', help='use smooth loss for regular albedo')
